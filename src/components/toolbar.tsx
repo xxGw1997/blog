@@ -1,6 +1,8 @@
 import Link from "next/link";
-import { LuNewspaper, LuRss, LuSun } from "react-icons/lu";
+import { LuNewspaper, LuRss } from "react-icons/lu";
+
 import { ActiveLink } from "~/components/active-link";
+import { ThemeSwitch } from "./theme-switch";
 
 const navItems = [
   {
@@ -33,12 +35,14 @@ export const Toolbar = () => {
       </Link>
       <nav className="flex-1 max-w-xl h-[60px] mx-auto flex justify-around items-center max-md:hidden">
         {navItems.map((item) => (
-          <ActiveLink href={`${item.link}`}>{item.title}</ActiveLink>
+          <ActiveLink href={`${item.link}`} key={item.title}>
+            {item.title}
+          </ActiveLink>
         ))}
       </nav>
       <div className="absolute right-5 m-7 top-0 flex items-center gap-x-10 max-md:gap-x-2 max-sm:right-2">
         <LuRss size={24} />
-        <LuSun size={24} />
+        <ThemeSwitch />
       </div>
     </header>
   );

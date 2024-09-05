@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useEventListener, useInViewport, useMemoizedFn } from "ahooks";
 
 import { HeadItem } from "~/features/posts/api/use-get-toc";
@@ -12,8 +12,9 @@ interface WrapperPostProps {
 
 export const WrapperBlog = ({ headings, children }: WrapperPostProps) => {
   const clickArea = useRef<HTMLDivElement | null>(null);
-  const blogHTags = useRef<HTMLElement[]>([]);
   const tocLinks = useRef<HTMLLinkElement[]>([]);
+
+  const [blogHTags, setBlogHTags] = useState<HTMLElement[]>([]);
 
   const navigate = useMemoizedFn(() => {
     if (location.hash) {
@@ -79,9 +80,9 @@ export const WrapperBlog = ({ headings, children }: WrapperPostProps) => {
       ) as NodeListOf<HTMLLinkElement>),
     ];
 
-    blogHTags.current = tags;
+    setBlogHTags(tags);
     tocLinks.current = links;
-  }, []);
+  }, [setBlogHTags]);
 
   const inViewCallback = useMemoizedFn((entry: IntersectionObserverEntry) => {
     const id = entry.target.getAttribute("id");
@@ -104,14 +105,14 @@ export const WrapperBlog = ({ headings, children }: WrapperPostProps) => {
     firstVisibleLink && firstVisibleLink.classList.add("is-active");
   });
 
-  useInViewport(blogHTags.current, {
+  useInViewport(blogHTags, {
     callback: inViewCallback,
     threshold: 1,
   });
 
   return (
     <div className="max-w-5xl mx-auto relative mt-[200px]" ref={clickArea}>
-      <div className="sticky top-[150px] float-right">
+      <div className="sticky top-[150px] float-right max-md:hidden">
         <h2>TABLE OF CONTENTS</h2>
         <ul id="js-toc" className="flex flex-col gap-y-1">
           {headings.map((heading) => (

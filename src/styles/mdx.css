@@ -35,6 +35,10 @@
   @apply text-primary;
 }
 
+#js-toc li a:hover {
+  @apply text-primary;
+}
+
 a.header-anchor {
   position: absolute;
   left: -1em;

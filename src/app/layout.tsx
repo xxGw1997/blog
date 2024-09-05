@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import localFont from "next/font/local";
 
 import { Toolbar } from "~/components/toolbar";
+import Providers from "~/components/providers";
 
 import "~/styles/globals.css";
 
@@ -19,10 +20,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <Toolbar />
-        {children}
+        <Providers>
+          <Toolbar />
+          {children}
+        </Providers>
       </body>
     </html>
   );

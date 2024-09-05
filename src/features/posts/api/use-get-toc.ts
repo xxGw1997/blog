@@ -11,9 +11,8 @@ export const getToc = (content: string) => {
   // 匹配 #[1-6] 文本
   const headerExp = /\n(?<flag>#{1,6})\s+(?<content>.+)/g;
   // 去除 代码块 中的内容
-  const codeExp = /```[\s\S]*```/g;
+  const codeExp = /```[\s\S]*?```/g;
   const slugger = new GithubSlugger();
-
   const headings: HeadItem[] = Array.from(
     content.replace(codeExp, "").matchAll(headerExp)
   ).map(({ groups }, index) => {

@@ -70,7 +70,6 @@ export const useGetBlog = async (categroy: string, slug: string) => {
     });
 
     const headings = getToc(post.content);
-    console.log(headings)
 
     return {
       ...frontmatter,
