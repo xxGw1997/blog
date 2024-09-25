@@ -1,20 +1,21 @@
 import Link from "next/link";
 import { LuNewspaper, LuRss, LuSun } from "react-icons/lu";
+import { ActiveLink } from "~/components/active-link";
 
 const navItems = [
   {
     title: "博客",
-    link: "/posts",
+    link: "/",
     icon: <LuNewspaper size={24} />,
   },
   {
     title: "随笔",
-    link: "/notes",
+    link: "/",
     icon: <LuNewspaper size={24} />,
   },
   {
     title: "相册",
-    link: "/photos",
+    link: "/",
     icon: <LuNewspaper size={24} />,
   },
   {
@@ -32,7 +33,7 @@ export const Toolbar = () => {
       </Link>
       <nav className="max-w-xl h-full mx-auto flex justify-around items-center max-md:hidden">
         {navItems.map((item) => (
-          <Link href={`${item.link}`}>{item.title}</Link>
+          <ActiveLink href={`${item.link}`}>{item.title}</ActiveLink>
         ))}
       </nav>
       <div className="absolute h-full right-10 top-0 flex items-center gap-x-10">
