@@ -19,13 +19,13 @@ export const ActiveLink = ({
   ...props
 }: ActiveLinkProps) => {
   const pathname = usePathname();
-  const isActive = pathname === href;
+  const isActive = pathname.includes(href);
 
   return (
     <Link
       className={cn(
         className,
-        "text-shadow-hover",
+        "text-shadow-hover transition-all tracking-widest",
         isActive ? "text-shadow" : ""
       )}
       href={href}
