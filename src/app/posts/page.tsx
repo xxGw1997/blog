@@ -1,4 +1,4 @@
-import { getAllPosts } from "~/features/posts/api/use-get-posts";
+import { getAllPosts } from "~/features/posts/api/use-posts";
 
 import { CategorySelect } from "./category-select";
 import { PostList } from "./post-list";

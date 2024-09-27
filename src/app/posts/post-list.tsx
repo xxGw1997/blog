@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { FaArrowRight } from "react-icons/fa";
-import { PostData } from "~/features/posts/api/use-get-posts";
+import { PostData } from "~/features/posts/api/use-posts";
 
 interface PostListProps {
   posts: PostData[];
