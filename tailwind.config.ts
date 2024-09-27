@@ -59,6 +59,9 @@ const config: Config = {
       boxShadow: {
         custom: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
       },
+      animation:{
+        move: "move 1s infinite"
+      }
     },
   },
   plugins: [require("tailwindcss-animate")],

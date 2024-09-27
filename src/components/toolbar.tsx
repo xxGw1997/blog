@@ -27,16 +27,16 @@ const navItems = [
 
 export const Toolbar = () => {
   return (
-    <header>
-      <Link href="/" title="首页" className="fixed m-7">
+    <header className="h-[80px] flex items-center">
+      <Link href="/" title="首页" className="fixed m-7 max-md:absolute">
         ywx
       </Link>
-      <nav className="pt-7 max-w-xl h-[60px] mx-auto flex justify-around items-center max-md:hidden">
+      <nav className="flex-1 max-w-xl h-[60px] mx-auto flex justify-around items-center max-md:hidden">
         {navItems.map((item) => (
           <ActiveLink href={`${item.link}`}>{item.title}</ActiveLink>
         ))}
       </nav>
-      <div className="absolute right-10 m-7 top-0 flex items-center gap-x-10">
+      <div className="absolute right-5 m-7 top-0 flex items-center gap-x-10 max-md:gap-x-2 max-sm:right-2">
         <LuRss size={24} />
         <LuSun size={24} />
       </div>
