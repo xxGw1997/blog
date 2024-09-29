@@ -1,3 +1,19 @@
-import Video from "./video";
+import { MDXRemoteProps } from "next-mdx-remote/rsc";
 
-export { Video };
+import Video from "./video";
+import {
+  BlockH2Tag,
+  BlockH3Tag,
+  BlockH4Tag,
+  BlockH5Tag,
+  BlockH6Tag,
+} from "./block-h-tag";
+
+export const customMDXComponents: MDXRemoteProps["components"] = {
+  Video,
+  h2: BlockH2Tag,
+  h3: BlockH3Tag,
+  h4: BlockH4Tag,
+  h5: BlockH5Tag,
+  h6: BlockH6Tag,
+};

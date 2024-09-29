@@ -6,7 +6,7 @@ import rehypeKatex from "rehype-katex";
 import rehypePrettyCode from "rehype-pretty-code";
 import { visit } from "unist-util-visit";
 
-import { Video } from "~/components/mdx";
+import { customMDXComponents } from "~/components/mdx";
 
 import { getPostData } from "./use-posts";
 
@@ -20,7 +20,7 @@ export const useGetBlog = async (categroy: string, slug: string) => {
       desc: string;
     }>({
       source: post.content,
-      components: { Video },
+      components: customMDXComponents,
       options: {
         parseFrontmatter: true,
         mdxOptions: {

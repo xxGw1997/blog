@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("./mdx.css");
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }
@@ -9,7 +11,6 @@ body {
 html,
 body,
 :root {
-  height: 100%;
   background-color: rgba(127, 255, 212, 0.05);
 }
 
