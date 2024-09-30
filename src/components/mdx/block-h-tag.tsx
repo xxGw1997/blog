@@ -6,7 +6,11 @@ interface BlockHTagProps {
 
 export const BlockH2Tag = ({ children, id, ...rest }: BlockHTagProps) => {
   return (
-    <h2 {...rest} className="text-primary/90">
+    <h2
+      {...rest}
+      id={id}
+      className="text-primary/90 relative flex items-center"
+    >
       {children}
       <a href={`#${id}`} className="header-anchor">
         #
@@ -17,7 +21,11 @@ export const BlockH2Tag = ({ children, id, ...rest }: BlockHTagProps) => {
 
 export const BlockH3Tag = ({ children, id, ...rest }: BlockHTagProps) => {
   return (
-    <h3 {...rest} className="text-primary/80">
+    <h3
+      {...rest}
+      id={id}
+      className="text-primary/80 relative flex items-center"
+    >
       {children}
       <a href={`#${id}`} className="header-anchor">
         #
@@ -28,7 +36,11 @@ export const BlockH3Tag = ({ children, id, ...rest }: BlockHTagProps) => {
 
 export const BlockH4Tag = ({ children, id, ...rest }: BlockHTagProps) => {
   return (
-    <h4 {...rest} className="text-primary/70">
+    <h4
+      {...rest}
+      id={id}
+      className="text-primary/70 relative flex items-center"
+    >
       {children}
       <a href={`#${id}`} className="header-anchor">
         #
@@ -39,7 +51,11 @@ export const BlockH4Tag = ({ children, id, ...rest }: BlockHTagProps) => {
 
 export const BlockH5Tag = ({ children, id, ...rest }: BlockHTagProps) => {
   return (
-    <h5 {...rest} className="text-primary/60">
+    <h5
+      {...rest}
+      id={id}
+      className="text-primary/60 relative flex items-center"
+    >
       {children}
       <a href={`#${id}`} className="header-anchor">
         #
@@ -50,7 +66,11 @@ export const BlockH5Tag = ({ children, id, ...rest }: BlockHTagProps) => {
 
 export const BlockH6Tag = ({ children, id, ...rest }: BlockHTagProps) => {
   return (
-    <h6 {...rest} className="text-primary/50">
+    <h6
+      {...rest}
+      id={id}
+      className="text-primary/50 relative flex items-center"
+    >
       {children}
       <a href={`#${id}`} className="header-anchor">
         #

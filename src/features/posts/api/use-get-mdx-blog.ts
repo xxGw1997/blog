@@ -9,11 +9,11 @@ import { visit } from "unist-util-visit";
 import { customMDXComponents } from "~/components/mdx";
 
 import { getPostData } from "./use-posts";
+import { getToc } from "./use-get-toc";
 
 export const useGetBlog = async (categroy: string, slug: string) => {
   try {
     const post = await getPostData(categroy, slug);
-
     const { frontmatter, content } = await compileMDX<{
       title: string;
       date: string;
@@ -69,9 +69,13 @@ export const useGetBlog = async (categroy: string, slug: string) => {
       },
     });
 
+    const headings = getToc(post.content);
+    console.log(headings)
+
     return {
       ...frontmatter,
       content,
+      headings,
     };
   } catch (error) {
     notFound();
