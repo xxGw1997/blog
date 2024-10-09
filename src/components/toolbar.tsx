@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { LuNewspaper, LuRss } from "react-icons/lu";
 
 import { ActiveLink } from "~/components/active-link";

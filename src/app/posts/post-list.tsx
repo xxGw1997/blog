@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "next-view-transitions";
 import { FaArrowRight } from "react-icons/fa";
 import { PostData } from "~/features/posts/api/use-posts";
 
