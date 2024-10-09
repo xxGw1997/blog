@@ -10,7 +10,7 @@ export const PostList = ({ posts }: PostListProps) => {
   return (
     <div className="w-full grid grid-cols-2 max-md:grid-cols-1 gap-10 max-md:justify-center mt-10">
       {posts.map((post) => (
-        <article className="min-w-[300px] flex-1 bg-white rounded-sm shadow-lg card-shadow-hover group px-8 py-5 flex flex-col">
+        <article className="min-w-[300px] flex-1 bg-card rounded-sm shadow-lg card-shadow-hover group px-8 py-5 flex flex-col">
           <Link
             className="hover:underline decoration-primary decoration-2 underline-offset-4 font-bold text-lg"
             href={post.meta.href}

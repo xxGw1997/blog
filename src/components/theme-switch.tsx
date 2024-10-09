@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
@@ -15,11 +16,29 @@ export const ThemeSwitch = () => {
   if (!isClient) return "";
 
   const toggleTheme = async () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    const transition = document.startViewTransition(() => {
+      flushSync(() => {
+        if (theme === "light") {
+          setTheme("dark");
+        } else {
+          setTheme("light");
+        }
+      });
+    });
+
+    transition.ready.then(() => {
+      document.documentElement.animate(
+        {},
+        {
+          duration: 500,
+          easing: "ease-in",
+          pseudoElement:
+            theme === "dark"
+              ? "::view-transition-old(root)"
+              : "::view-transition-new(root)",
+        }
+      );
+    });
   };
 
   return (

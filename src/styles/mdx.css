@@ -91,13 +91,13 @@ h6:focus .header-anchor {
 }
 
 .prose pre code::-webkit-scrollbar-track {
-  @apply bg-gray-200 rounded-full; /* 滚动条轨道背景颜色 */
+  @apply bg-foreground rounded-full; /* 滚动条轨道背景颜色 */
 }
 
 .prose pre code::-webkit-scrollbar-thumb {
-  @apply bg-primary-foreground rounded-full; /* 滚动条滑块背景颜色和形状 */
+  @apply bg-primary/70 rounded-full; /* 滚动条滑块背景颜色和形状 */
 }
 
 .prose pre code::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary; /* 滑块悬停时的颜色 */
+  @apply bg-accent/70; /* 滑块悬停时的颜色 */
 }

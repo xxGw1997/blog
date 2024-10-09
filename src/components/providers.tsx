@@ -5,7 +5,7 @@ import { ThemeProviderProps } from "next-themes/dist/types";
 
 const Providers = ({ children }: ThemeProviderProps) => {
   return (
-    <ThemeProvider attribute="className" enableSystem>
+    <ThemeProvider attribute="class" enableSystem>
       {children}
     </ThemeProvider>
   );

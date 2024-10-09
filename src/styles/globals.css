@@ -6,27 +6,41 @@
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  /* background-color: hsl(0, 100%, 50%); */
+}
+
+.wqeqw {
+  background-color: hsl(54, 60%, 93%);
+  background-color: hsl(176, 63%, 75%);
+  background-color: hsl(185, 63%, 64%);
+  background-color: hsl(217, 65%, 68%);
 }
 
 @layer base {
   :root {
-    --background: 0 100% 50%;
-    --foreground: 240 10% 3.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 240 10% 3.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 240 10% 3.9%;
-    --primary: 142.1 76.2% 36.3%;
-    --primary-foreground: 355.7 100% 97.3%;
-    --secondary: 240 4.8% 95.9%;
-    --secondary-foreground: 240 5.9% 10%;
-    --muted: 240 4.8% 95.9%;
-    --muted-foreground: 240 3.8% 46.1%;
-    --accent: 240 4.8% 95.9%;
-    --accent-foreground: 240 5.9% 10%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --background: 210 16% 98%; /* 轻灰色背景 */
+    --foreground: 210 22% 15%; /* 深灰色前景 */
+
+    --card: 0 0% 100%; /* 纯白色卡片背景 */
+    --card-foreground: 210 11% 36%; /* 中灰色卡片前景 */
+
+    --popover: 0 0% 100%; /* 纯白色弹出层 */
+    --popover-foreground: 210 22% 15%; /* 深灰色弹出层前景 */
+
+    --primary: 282 94% 50%; /* 主题色 */
+    --primary-foreground: 0 0% 100%; /* 白色文字搭配背景 */
+
+    --secondary: 282 94% 35%; /* 中灰色次要色 */
+    --secondary-foreground: 0 0% 95%; /* 白色文字搭配次要色背景 */
+
+    --muted: 282 54% 35%; /* 极浅灰色，弱化的元素 */
+    --muted-foreground: 0 0% 90%; /* 中灰色弱化前景 */
+
+    --accent: 178 87% 50%; /* 青色强调色 */
+    --accent-foreground: 0 0% 100%; /* 白色文字搭配青色背景 */
+
+    --destructive: 354 70% 54%; /* 红色危险操作 */
+    --destructive-foreground: 0 0% 100%; /* 白色文字搭配红色背景 */
+
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 142.1 76.2% 36.3%;
@@ -39,22 +53,30 @@ body {
   }
 
   .dark {
-    --background: 20 14.3% 4.1%;
-    --foreground: 0 0% 95%;
-    --card: 24 9.8% 10%;
-    --card-foreground: 0 0% 95%;
-    --popover: 0 0% 9%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 240 3.7% 15.9%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 15%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 12 6.5% 15.1%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 85.7% 97.3%;
+    --background: 210 28% 12%; /* 深蓝灰背景 */
+    --foreground: 210 15% 85%; /* 浅灰前景 */
+
+    --card: 210 22% 16%; /* 深灰卡片背景 */
+    --card-foreground: 210 15% 85%; /* 浅灰卡片前景 */
+
+    --popover: 210 22% 16%; /* 深灰弹出层背景 */
+    --popover-foreground: 210 15% 85%; /* 浅灰弹出层前景 */
+
+    --primary: 178 87% 50%; /* 深蓝色主题色 */
+    --primary-foreground: 0 100% 0%; /* 白色文字搭配深蓝色背景 */
+
+    --secondary: 178 87% 35%; /* 中灰色次要色 */
+    --secondary-foreground: 210 15% 85%; /* 浅灰文字搭配次要色背景 */
+
+    --muted: 178 47% 35%; /* 更深灰的弱化色 */
+    --muted-foreground: 210 10% 60%; /* 中灰弱化前景 */
+
+    --accent: 282 94% 50%; /* 深青色强调 */
+    --accent-foreground: 0 0% 100%; /* 白色文字搭配深青色背景 */
+
+    --destructive: 354 70% 45%; /* 深红色危险操作 */
+    --destructive-foreground: 0 0% 100%; /* 白色文字搭配深红色背景 */
+
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 142.4 71.8% 29.2%;
@@ -77,13 +99,16 @@ body {
 }
 
 .card-shadow-hover:hover {
-  box-shadow: 0 10px 15px -3px rgba(127, 255, 212, 0.3),
-    0 4px 6px -4px rgba(127, 255, 212, 0.3);
+  box-shadow: 0 10px 15px -3px hsl(var(--primary) / 0.3),
+    0 4px 6px -4px hsl(var(--primary) / 0.3);
 }
 
 @layer base {
   * {
     @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
   }
 }
 

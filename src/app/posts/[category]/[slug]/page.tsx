@@ -15,7 +15,10 @@ const BlogPage = async ({ params: { category, slug } }: BlogPage) => {
     <div className="w-full">
       <WrapperBlog headings={headings}>
         <article className="w-full p-7">
-          <div className="prose" id="prose">
+          <div
+            className="prose prose-headings:text-foreground prose-p:text-foreground prose-td:text-foreground prose-li:text-foreground prose-code:text-foreground prose-strong:text-foreground"
+            id="prose"
+          >
             {content}
           </div>
         </article>
