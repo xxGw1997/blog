@@ -1,11 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { ButtonHTMLAttributes, useEffect, useState } from "react";
 import { flushSync } from "react-dom";
 import { useTheme } from "next-themes";
 import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
-export const ThemeSwitch = () => {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const ThemeSwitch = ({ className }: ButtonProps) => {
   const { theme, setTheme } = useTheme();
   const [isClient, setIsClient] = useState(false);
 
@@ -43,7 +45,7 @@ export const ThemeSwitch = () => {
 
   return (
     <>
-      <button onClick={toggleTheme}>
+      <button className={className} onClick={toggleTheme}>
         {theme === "light" ? (
           <MdOutlineLightMode size={24} />
         ) : (

@@ -50,10 +50,8 @@ export const Toolbar = () => {
           </ActiveLink>
         ))}
       </nav>
-      <div className="absolute right-5 m-7 top-0 flex items-center gap-x-10 max-md:gap-x-2 max-sm:right-2">
-        <LuRss size={24} />
-        <ThemeSwitch />
-      </div>
+      <LuRss size={24} className="absolute right-20" />
+      <ThemeSwitch className="fixed right-5" />
     </header>
   );
 };
