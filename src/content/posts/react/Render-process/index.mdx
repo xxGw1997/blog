@@ -1,0 +1,160 @@
+---
+title: "2.Build my react - React的渲染流程"
+date: 2024-10-28
+desc: React 的渲染流程
+---
+
+# React 的渲染流程
+
+## 两大阶段
+
+在 React 中整体的渲染流程大致可以分为两大阶段
+
+- render 阶段： 调合虚拟 Dom,计算出最终需要渲染出来的虚拟 Dom。
+- commit 阶段： 根据 render 阶段计算出来的虚拟 Dom,渲染出具体的 UI。
+
+<img src="./Render-process/process.png" alt="process" />
+
+- 调度器(Scheduler): 调度任务,赋予任务优先级,并且进行排序,让优先级高的任务先进入到 Reconciler.
+- 协调器(Reconciler): 生产 Fiber 对象,收集副作用,标记出哪些节点发生了变化,并且打上相应的 Flags, diff 算法也是在这阶段执行的。
+- 渲染器(Renderer): 根据协调器计算出来的虚拟 Dom,同步的渲染到 UI 视图中.
+
+上图中的 Render 阶段(虚线框)的工作流程是可以随时被以下原因进行中断的:
+
+- 其他更高优先级的任务需要执行
+- 当前帧 time slice(时间切片)没有剩余的时间了
+- 发生了其他的未知错误
+
+并且 Render 阶段的工作是在内存中进行的,不会更新宿主环境的 UI,因此这个阶段工作流程反复被中断,用户也不会看到“更新不完全的 UI”.
+当 Scheluer 调度完成后,将任务交给 Reconciler.Reconciler 就需要计算出最新的 UI,最终由 Renderer 同步进行渲染更新操作.
+
+## 调度器(Scheluer)
+
+在 React v16 之前,采用的是 Stack 架构,在进行遍历任务时,只能同步进行,无法被打断,执行完后可能会占用渲染线程的时间,这就会导致浏览器可能出现卡顿、丢帧的情况。
+从 React v16 开始,从架构上进行了两大更新:
+
+- 引入 Fiber
+- 新增 Scheduler
+
+浏览器中有一个 API (**_requestIdleCallback_**),主要功能是在浏览器空闲时,可以执行你传入的 callback 函数,这样就可以实现在浏览器空闲时执行任务.
+
+但是 React 开发团队 并没有采用该 API,因为该 API 存在兼容性问题.所以 React 开发团队自己实现了一套这样的机制,这个就是 Scheduler.
+
+## 协调器(Reconciler)
+
+协调器是 render 阶段的第二个阶段工作, 该阶段主要的工作就是: 类组件或函数组件本身在这个阶段会被调用.
+
+根据 Scheduler 调度结果的不同,协调器起点可能是不一样的
+
+- performSyncWorkOnRoot(同步更新流程)
+
+```js
+// performSyncWorkOnRoot
+function workLoopSync() {
+  while (workInProgress !== null) {
+    performUnitOfWork(workInProgress);
+  }
+}
+```
+
+- performConcurrentWorkOnRoot(并发更新流程)
+
+```js
+// performConcurrentWorkOnRoot
+function workLoopConcurrent() {
+  while (workInProgress !== null && !shouldYield()) {
+    performUnitOfWork(workInProgress);
+  }
+}
+```
+
+Fiber 是用来描述 DOM 的结构,最后需要形成一颗 Fiber tree, 并且这颗树是通过链表的形式串联在一起的.
+
+**_workInProgress_** 代表的是当前的 Fiber Node
+
+**_performUnitOfWork_** 方法会创建下一个 Fiber Node, 并且还会将已创建的 Fiber Node 进行连接(child, return,sibling), 从而形成一个链表结构的 Fiber tree.
+
+如果 workInProgress 为 null,说明已经没有下一个 FiberNode, 也就是说明整颗 Fiber tree 已经构建完成.
+
+上面两个方法唯一的区别是是否调用了 shouldYield, 这个方法是用来判断当前流程是否可以中断.
+
+**_performUnitOfWork_** 在创建下一个 Fiber Node 时, 整体上的工作流程可以分为两个:
+
+- 递阶段
+- 归阶段
+
+### 递阶段
+
+递阶段会从 HostRootFiber 开始向下以深度优先的方式进行遍历,遍历到的每一个 FiberNode 都会执行 benginWork 方法,该方法会根据传入的 FiberNode 创建下一级的 FiberNode:
+
+- 下一级元素只有一个时,beginWork 会创建对应的 FiberNode, 并与 workInProgress 进行连接
+
+```jsx
+<ul>
+  <li></li>
+</ul>
+```
+
+这里就会创建 li 对应的 FiberNode,并且将 workInProgress 赋值给正在创建的 FiberNode 的 return 属性进行连接
+
+```js
+LiFiber.return = UlFiber;
+```
+
+- 下一级有多个元素,这时 beginWork 方法会依次创建所有的子 FiberNode 并且所有的子 FiberNode 通过 sibling 连接到一起
+
+```jsx
+<ul>
+  <li></li>
+  <li></li>
+  <li></li>
+</ul>
+```
+
+此时会创建 3 个 li 标签对应的 FiberNode,连接情况如下:
+
+```js
+// 子Fiber 通过sibling依次连接
+Li0Fiber.sibling = Li1Fiber;
+Li1Fiber.sibling = Li2Fiber;
+
+// 所有子Fiber 都会和父Fiber 连接
+Li0Fiber.sibling = UlFiber;
+Li1Fiber.sibling = UlFiber;
+Li2Fiber.sibling = UlFiber;
+```
+
+由于采用的是深度优先的遍历方式,所以当遍历到最深处,就会进入到**_归阶段_**
+
+### 归阶段
+
+归阶段会调用 completeWork 方法来处理 FiberNode, 做一些副作用的收集.
+
+当某个 FiberNode 执行完成 completeWork 后, 如果存在兄弟元素,就会进入到兄弟元素的递阶段,如果不存在兄弟元素,就会进入父 FiberNode 的归阶段.
+
+```js
+function performUnitOfWork(fiberNode) {
+  // ... beginWork
+
+  if (fiberNode.child) {
+    performUnitOfWork(fiberNode.child);
+  }
+
+  // ... completeWork
+  if (fiberNode.sibling) {
+    performUnitOfWork(fiberNode.sibling);
+  }
+}
+```
+
+## 渲染器(Renderer)
+
+Renderer 工作阶段被称为 **_commit_** 阶段. 该阶段会将各种副作用 commit 到宿主环境的 UI 中进行调用.
+
+相较于之前面的 Render 阶段可以被中断, commit 阶段一旦开始就会同步执行, 直到完成所有的工作渲染完毕.
+
+整个渲染器过程可以大致分为三个子阶段:
+
+- BeforeMutation: 执行 commitBeforMutationEffects 相应的回调函数
+- Mutation: 执行 commitMutationEffects 相应的回调函数, 执行完成之后会进行 Fiber Tree 的切换
+- Layout: 在 Fiber Tree 切换完成后, 会执行 commitLayoutEffects 相应的回调函数

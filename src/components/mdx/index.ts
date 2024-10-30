@@ -9,6 +9,7 @@ import {
   BlockH6Tag,
 } from "./block-h-tag";
 import { Pre } from "./pre";
+import { CustomImage } from "./custom-image";
 
 export const customMDXComponents: MDXRemoteProps["components"] = {
   Video,
@@ -18,4 +19,5 @@ export const customMDXComponents: MDXRemoteProps["components"] = {
   h5: BlockH5Tag,
   h6: BlockH6Tag,
   pre: Pre,
+  img: CustomImage,
 };
