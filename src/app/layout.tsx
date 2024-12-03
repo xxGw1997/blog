@@ -1,14 +1,20 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import { ViewTransitions } from "next-view-transitions";
 import localFont from "next/font/local";
 
-import { Toolbar } from "~/components/toolbar";
 import Providers from "~/components/providers";
 
 import "~/styles/globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const myFont = localFont({
+  src: [
+    {
+      path: "./fonts/font.ttf",
+      weight: "400",
+      style: "normal",
+    },
+  ],
+});
 
 export const metadata: Metadata = {
   title: "xxgw",
@@ -23,11 +29,8 @@ export default function RootLayout({
   return (
     <ViewTransitions>
       <html lang="en" suppressHydrationWarning>
-        <body className={`${inter.className} antialiased`}>
-          <Providers>
-            <Toolbar />
-            {children}
-          </Providers>
+        <body className={`${myFont.className} antialiased`}>
+          <Providers>{children}</Providers>
         </body>
       </html>
     </ViewTransitions>
