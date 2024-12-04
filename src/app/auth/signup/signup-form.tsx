@@ -2,7 +2,7 @@
 import { Input } from "~/components/ui/input";
 import { Label } from "~/components/ui/label";
 import SubmitButton from "~/components/ui/submit-button";
-import { signUp } from "~/features/auth/api/use-signup";
+import { signUp } from "~/features/auth/api/use-auth";
 import React from "react";
 import { useFormState } from "react-dom";
 

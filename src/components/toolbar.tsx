@@ -7,6 +7,7 @@ import ywxDarkImg from "~/assets/imgs/ywx-dark.png";
 
 import { ThemeSwitch } from "./theme-switch";
 import DarkModeImg from "./dark-mode-img";
+import SignInButton from "./sign-in-button";
 
 const navItems = [
   {
@@ -50,6 +51,9 @@ export const Toolbar = () => {
           </ActiveLink>
         ))}
       </nav>
+      <div className="absolute right-40">
+        <SignInButton />
+      </div>
       <LuRss size={24} className="absolute right-20" />
       <ThemeSwitch className="fixed right-5" />
     </header>
