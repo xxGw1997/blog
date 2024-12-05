@@ -68,6 +68,8 @@ export async function signIn(
         id: result.id,
         name: result.name,
       },
+      accessToken: result.accessToken,
+      refreshToken: result.refreshToken,
     });
     redirect("/");
   } else {

@@ -9,8 +9,8 @@ export type Session = {
     id: string;
     name: string;
   };
-  // accessToken: string;
-  // refreshToken: string;
+  accessToken: string;
+  refreshToken: string;
 };
 
 const encodeSessionKey = new TextEncoder().encode(SESSION_SECRET_KEY);
