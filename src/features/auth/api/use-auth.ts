@@ -79,3 +79,33 @@ export async function signIn(
     };
   }
 }
+
+export async function refreshToken(oldRefreshToken: string) {
+  try {
+    const response = await fetch(`${BACKEND_URL}/auth/refresh`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ refresh: oldRefreshToken }),
+    });
+
+    if (!response.ok)
+      throw new Error("Failed to refresh token" + response.statusText);
+
+    const { accessToken, refreshToken } = await response.json();
+
+    // update Session
+    const updatedRes = await fetch("http://localhost:3000/api/auth/update-session", {
+      method: "POST",
+      body: JSON.stringify({ accessToken, refreshToken }),
+    });
+
+    if (!updatedRes.ok) throw new Error("Failed to update the tokens");
+
+    return accessToken;
+  } catch (error) {
+    console.error("Refresh Token Failed", error);
+    return null;
+  }
+}
