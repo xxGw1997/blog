@@ -11,9 +11,9 @@ import { customMDXComponents } from "~/components/mdx";
 import { getPostData } from "./use-posts";
 import { getToc } from "./use-get-toc";
 
-export const useGetBlog = async (categroy: string, slug: string) => {
+export const useGetBlog = async (categroy: string, slug: string, isTest: boolean = false) => {
   try {
-    const post = await getPostData(categroy, slug);
+    const post = await getPostData(categroy, slug, isTest);
     const { frontmatter, content } = await compileMDX<{
       title: string;
       date: string;

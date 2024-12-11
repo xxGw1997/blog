@@ -2,7 +2,7 @@
 
 import { redirect } from "next/navigation";
 import { createSession } from "~/features/session/use-session";
-import { BACKEND_URL } from "~/lib/constants";
+import { BACKEND_URL, LOCAL_URL } from "~/lib/constants";
 import { FormState, LoginFormSchema, SignupFormSchema } from "~/lib/types";
 
 export async function signUp(
@@ -67,6 +67,7 @@ export async function signIn(
       user: {
         id: result.id,
         name: result.name,
+        role: result.role,
       },
       accessToken: result.accessToken,
       refreshToken: result.refreshToken,
@@ -96,7 +97,7 @@ export async function refreshToken(oldRefreshToken: string) {
     const { accessToken, refreshToken } = await response.json();
 
     // update Session
-    const updatedRes = await fetch("http://localhost:3000/api/auth/update-session", {
+    const updatedRes = await fetch(`${LOCAL_URL}/api/auth/update-session`, {
       method: "POST",
       body: JSON.stringify({ accessToken, refreshToken }),
     });

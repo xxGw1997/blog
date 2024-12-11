@@ -57,12 +57,20 @@ export const getPostsByCategory = async (category: string) => {
 };
 
 // 获取post内容
-export const getPostData = async (category: string, slug: string) => {
+export const getPostData = async (category: string, slug: string, isTest: boolean = false) => {
   const prefixPath = `${postsDir}/${category}/${slug}`;
   const filePath = path.join(prefixPath, "/index.mdx");
 
   try {
-    const fileContent = fs.readFileSync(filePath, "utf-8");
+    let fileContent = ''
+    if (isTest) {
+      const response = await fetch(`https://xxgw1997.oss-cn-hangzhou.aliyuncs.com/index.mdx`)
+      if(response.ok) {
+        fileContent = await response.text()
+      }
+    }else {
+      fileContent = fs.readFileSync(filePath, "utf-8");
+    }
 
     // 获取 meta 信息
     const { data } = matter(fileContent);

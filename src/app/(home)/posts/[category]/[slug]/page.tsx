@@ -8,7 +8,8 @@ interface BlogPage {
 const BlogPage = async ({ params: { category, slug } }: BlogPage) => {
   const { content, title, desc, date, headings } = await useGetBlog(
     category,
-    slug
+    slug,
+    true
   );
 
   return (
