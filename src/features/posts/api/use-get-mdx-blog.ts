@@ -11,10 +11,11 @@ import { customMDXComponents } from "~/components/mdx";
 import { getPostData } from "./use-posts";
 import { getToc } from "./use-get-toc";
 
-export const useGetBlog = async (categroy: string, slug: string, isTest: boolean = false) => {
+export const useGetBlog = async (slug: string) => {
   try {
-    const post = await getPostData(categroy, slug, isTest);
-    const { frontmatter, content } = await compileMDX<{
+    const post = await getPostData(slug);
+    if (!post) throw new Error("Post not found");
+    const { content } = await compileMDX<{
       title: string;
       date: string;
       desc: string;
@@ -72,7 +73,9 @@ export const useGetBlog = async (categroy: string, slug: string, isTest: boolean
     const headings = getToc(post.content);
 
     return {
-      ...frontmatter,
+      title: post.meta.title,
+      desc: post.meta.desc,
+      date: post.meta.date,
       content,
       headings,
     };

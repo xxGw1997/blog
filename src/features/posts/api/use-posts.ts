@@ -1,85 +1,95 @@
-import path from "path";
-import fs from "fs";
-import matter from "gray-matter";
+"use server";
+
+import { format } from "date-fns";
+import { BACKEND_URL } from "~/lib/constants";
 
 export type PostData = {
   meta: {
     title: string;
     date: string;
     desc: string;
-    href: string;
+    id: number;
   };
   content: string;
 };
 
-const postsDir = path.join(process.cwd(), "src", "content", "posts");
-
-// 获取posts下所有的post
-export const getAllPosts = async () => {
-  //获取posts下所有文件夹名(category)
-
-  const categories = fs
-    .readdirSync(postsDir, { withFileTypes: true })
-    .filter((entry) => entry.isDirectory())
-    .map((entry) => entry.name);
-
-  const postsOfCategory = await Promise.all(
-    categories.map(async (category) => {
-      return await getPostsByCategory(category);
-    })
-  );
-
-  return postsOfCategory.flat();
+export type ReturnPostData = {
+  id: number;
+  title: string;
+  desc: string;
+  publishDate: string;
+  createdAt: string;
+  author: {
+    name: string;
+    email: string;
+  };
+  categories: Array<string>;
 };
 
-// 获取posts某个分类下所有的post
-export const getPostsByCategory = async (category: string) => {
-  const pathname = path.join(postsDir, category);
-  try {
-    const postNames = fs
-      .readdirSync(pathname, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
-      .map((entry) => entry.name);
+// 获取posts下所有的post
+export const getAllPosts = async (category: string | undefined | string[]) => {
+  const bodyData = {
+    page: {
+      index: 0,
+      size: 30,
+    },
+    category,
+  };
 
-    const posts = await Promise.all(
-      postNames.map(async (postName) => {
-        return await getPostData(category, postName);
-      })
-    );
-    if (posts.length === 0) return [];
-
-    return posts.sort((a, b) =>
-      Date.parse(a.meta.date) < Date.parse(b.meta.date) ? 1 : -1
-    );
-  } catch (error) {
-    return [];
+  const res = await fetch(`${BACKEND_URL}/post/list`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(bodyData),
+  });
+  if (res.ok) {
+    const list = await res.json();
+    if (list.success) {
+      const posts = list.data.postList as ReturnPostData[];
+      return posts.map((post) => ({
+        meta: {
+          title: post.title,
+          date: format(new Date(post.publishDate), "yyyy-MM-dd hh:mm"),
+          desc: post.desc,
+          categories: post.categories,
+          author: post.author,
+          id: post.id,
+        },
+      }));
+    }
+  } else {
+    throw new Error("Fetch posts failed~");
   }
 };
 
 // 获取post内容
-export const getPostData = async (category: string, slug: string, isTest: boolean = false) => {
-  const prefixPath = `${postsDir}/${category}/${slug}`;
-  const filePath = path.join(prefixPath, "/index.mdx");
-
+export const getPostData = async (slug: string) => {
   try {
-    let fileContent = ''
-    if (isTest) {
-      const response = await fetch(`https://xxgw1997.oss-cn-hangzhou.aliyuncs.com/index.mdx`)
-      if(response.ok) {
-        fileContent = await response.text()
+    const res = await fetch(`${BACKEND_URL}/post/${slug}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      if (data.success) {
+        const post = data.data;
+        return {
+          meta: {
+            title: post.title,
+            desc: post.desc,
+            date: post.publishDate,
+          },
+          content: post.content,
+        } as PostData;
       }
-    }else {
-      fileContent = fs.readFileSync(filePath, "utf-8");
+    } else {
+      throw new Error("Fetch post failed");
     }
-
-    // 获取 meta 信息
-    const { data } = matter(fileContent);
-
-    return {
-      meta: { ...data, href: `/posts/${category}/${slug}` },
-      content: fileContent,
-    } as PostData;
   } catch (error) {
-    throw new Error("post not found");
+    throw new Error("Fetch post failed");
   }
 };
