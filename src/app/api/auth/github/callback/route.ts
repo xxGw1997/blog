@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { NextRequest } from "next/server";
 import { createSession } from "~/features/session/use-session";
+import { Role } from "~/lib/types";
 
 export async function GET(req: NextRequest) {
   const { searchParams } = new URL(req.url);
@@ -17,6 +18,7 @@ export async function GET(req: NextRequest) {
     user: {
       id: userId,
       name,
+      role: Role.USER
     },
     accessToken,
     refreshToken,
