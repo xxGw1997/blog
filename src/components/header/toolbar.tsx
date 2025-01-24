@@ -1,13 +1,13 @@
 import { Link } from "next-view-transitions";
 import { LuNewspaper, LuRss } from "react-icons/lu";
 
-import { ActiveLink } from "~/components/active-link";
 import ywxImg from "~/assets/imgs/ywx.png";
 import ywxDarkImg from "~/assets/imgs/ywx-dark.png";
 
-import { ThemeSwitch } from "./theme-switch";
-import DarkModeImg from "./dark-mode-img";
-import SignInButton from "./sign-in-button";
+import { ThemeSwitch } from "../theme-switch";
+import DarkModeImg from "../dark-mode-img";
+import SignInButton from "../sign-in-button";
+import NavBar from "./navbar";
 
 const navItems = [
   {
@@ -44,18 +44,12 @@ export const Toolbar = () => {
           priority
         />
       </Link>
-      <nav className="flex-1 max-w-xl h-[60px] mx-auto flex justify-around items-center max-md:hidden">
-        {navItems.map((item) => (
-          <ActiveLink href={`${item.link}`} key={item.title}>
-            {item.title}
-          </ActiveLink>
-        ))}
-      </nav>
-      <div className="absolute right-40">
+      <NavBar />
+      <div className="absolute right-20 top-5">
         <SignInButton />
       </div>
-      <LuRss size={24} className="absolute right-20" />
-      <ThemeSwitch className="fixed right-5" />
+      {/* <LuRss size={24} className="absolute right-20" /> */}
+      <ThemeSwitch className="fixed right-5 top-5 hidden md:flex" />
     </header>
   );
 };

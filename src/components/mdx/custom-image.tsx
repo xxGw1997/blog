@@ -27,7 +27,7 @@ export const CustomImage = ({
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger>
-        <img alt={alt} src={src} width={width} height={height} {...rest}  className="cursor-zoom-in"/>;
+        <img alt={alt} src={src} width={width} height={height} {...rest}  className="cursor-zoom-in"/>
       </DialogTrigger>
       <DialogContent onInteractOutside={(e) => e.preventDefault()} className="max-w-[90%] max-h-[80vh] overflow-y-scroll">
         <DialogHeader>

@@ -2,6 +2,15 @@ import { getAllPosts } from "~/features/posts/api/use-posts";
 
 import { CategorySelect } from "./category-select";
 import { PostList } from "./post-list";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s - xxgw",
+    default: "posts",
+  },
+  description: "xxgw's blog",
+};
 
 const PostsPage = async ({
   searchParams,

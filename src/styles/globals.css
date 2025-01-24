@@ -89,8 +89,10 @@ body {
 }
 
 .text-shadow {
-  text-shadow: 5px 5px 20px hsl(var(--primary)),
-    -5px -5px 20px hsl(var(--primary));
+  text-shadow: 5px 5px 30px hsl(var(--primary)),
+    -5px -5px 30px hsl(var(--primary)),
+    5px -5px 30px hsl(var(--primary)),
+    -5px 5px 30px hsl(var(--primary));
   color: hsl(var(--primary));
 }
 

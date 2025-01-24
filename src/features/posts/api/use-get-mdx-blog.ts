@@ -80,6 +80,7 @@ export const useGetBlog = async (slug: string) => {
       headings,
     };
   } catch (error) {
+    console.log(error)
     notFound();
   }
 };

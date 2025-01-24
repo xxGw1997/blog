@@ -1,8 +1,21 @@
 import { useGetBlog } from "~/features/posts/api/use-get-mdx-blog";
 import { WrapperBlog } from "./wrapper-blog";
+import { Metadata } from "next";
 
 interface BlogPage {
   params: { slug: string };
+}
+
+export async function generateMetadata({
+  params,
+}: BlogPage): Promise<Metadata> {
+  const slug = params.slug;
+  const { title, desc } = await useGetBlog(slug);
+
+  return {
+    title,
+    description: desc,
+  };
 }
 
 const BlogPage = async ({ params: { slug } }: BlogPage) => {

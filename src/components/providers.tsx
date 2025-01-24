@@ -3,10 +3,12 @@
 import { ThemeProvider } from "next-themes";
 import { ThemeProviderProps } from "next-themes/dist/types";
 
+import ActiveSectionContextProvider from "./active-section";
+
 const Providers = ({ children }: ThemeProviderProps) => {
   return (
-    <ThemeProvider attribute="class" enableSystem>
-      {children}
+    <ThemeProvider attribute="class" defaultTheme="dark">
+      <ActiveSectionContextProvider>{children}</ActiveSectionContextProvider>
     </ThemeProvider>
   );
 };

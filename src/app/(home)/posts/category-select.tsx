@@ -12,32 +12,32 @@ import {
 } from "~/components/ui/select";
 import { getCategories } from "~/features/category/api/use-get-categories";
 
-export const categories = [
-  {
-    label: "All",
-    value: "all",
-  },
-  {
-    label: "React",
-    value: "react",
-  },
-  {
-    label: "Vue",
-    value: "vue",
-  },
-  {
-    label: "CSS",
-    value: "css",
-  },
-  {
-    label: "NEXT.JS",
-    value: "next",
-  },
-  {
-    label: "NODE.JS",
-    value: "node",
-  },
-];
+// export const categories = [
+//   {
+//     label: "All",
+//     value: "all",
+//   },
+//   {
+//     label: "React",
+//     value: "react",
+//   },
+//   {
+//     label: "Vue",
+//     value: "vue",
+//   },
+//   {
+//     label: "CSS",
+//     value: "css",
+//   },
+//   {
+//     label: "NEXT.JS",
+//     value: "next",
+//   },
+//   {
+//     label: "NODE.JS",
+//     value: "node",
+//   },
+// ];
 
 type CategoryType = {
   id: number;

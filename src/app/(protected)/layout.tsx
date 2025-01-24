@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import React, { PropsWithChildren } from "react";
-import { Toolbar } from "~/components/toolbar";
+import { Toolbar } from "~/components/header/toolbar";
 import { getSession } from "~/features/session/use-session";
 
 const PostLayout = async ({ children }: PropsWithChildren) => {

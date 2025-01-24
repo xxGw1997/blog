@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { ViewTransitions } from "next-view-transitions";
 import localFont from "next/font/local";
+import BackgroundLight from "~/components/background-light";
 
 import Providers from "~/components/providers";
 
@@ -17,7 +18,10 @@ const myFont = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "xxgw",
+  title: {
+    template: "%s - xxgw",
+    default: "xxgw",
+  },
   description: "xxgw's blog",
 };
 
@@ -28,8 +32,11 @@ export default function RootLayout({
 }>) {
   return (
     <ViewTransitions>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`${myFont.className} antialiased`}>
+      <html lang="en" suppressHydrationWarning className="!scroll-smooth">
+        <body
+          className={`${myFont.className} antialiased flex flex-col relative`}
+        >
+          <BackgroundLight />
           <Providers>{children}</Providers>
         </body>
       </html>
