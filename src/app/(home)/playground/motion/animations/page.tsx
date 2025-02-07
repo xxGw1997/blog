@@ -5,7 +5,7 @@ import { ViewBaseAnimations } from "~/components/playground/motion/animations/vi
 
 const MotionPlayground = () => {
   return (
-    <div className="w-full h-full flex justify-center flex-col">
+    <div className="w-full h-full flex justify-center items-center flex-col gap-10 py-20">
       <AnimationControls />
       <ViewBaseAnimations />
       <ScrollAnimations />

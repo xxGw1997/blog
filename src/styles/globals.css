@@ -88,10 +88,35 @@ body {
   }
 }
 
+@layer utilities {
+  .custom-scrollbar::-webkit-scrollbar {
+    width: 15px;
+    height: 15px;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7edf7;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbe0db;
+    border-radius: 100vh;
+    border: 3px solid #f7eded;
+  }
+
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #a3c0a0;
+  }
+}
+
+.shadow-container {
+  box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+}
+
 .text-shadow {
   text-shadow: 5px 5px 30px hsl(var(--primary)),
-    -5px -5px 30px hsl(var(--primary)),
-    5px -5px 30px hsl(var(--primary)),
+    -5px -5px 30px hsl(var(--primary)), 5px -5px 30px hsl(var(--primary)),
     -5px 5px 30px hsl(var(--primary));
   color: hsl(var(--primary));
 }

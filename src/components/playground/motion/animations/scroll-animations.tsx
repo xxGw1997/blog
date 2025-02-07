@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
+import MotionPlaygroundContainer from "../container";
 
 export const ScrollAnimations = () => {
-  const { scrollYProgress } = useScroll();
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({ container: containerRef });
 
   const scaleX = useSpring(scrollYProgress);
 
@@ -15,14 +17,16 @@ export const ScrollAnimations = () => {
   );
 
   return (
-    <div>
+    <MotionPlaygroundContainer
+      ref={containerRef}
+      className="overflow-y-scroll overflow-x-hidden relative"
+    >
       <motion.div
+        className="sticky top-0"
         style={{
           background,
           scaleX,
           transformOrigin: "left",
-          position: "fixed",
-          top: 0,
           width: "100%",
           height: "5px",
         }}
@@ -117,6 +121,6 @@ export const ScrollAnimations = () => {
           some text some text some text some text some text some text some text
         </p>
       </div>
-    </div>
+    </MotionPlaygroundContainer>
   );
 };
