@@ -3,9 +3,22 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import MotionPlaygroundContainer from "../container";
+import { ContainerRefType } from "../types";
 
 export const ScrollAnimations = () => {
   const containerRef = useRef(null);
+
+  return (
+    <MotionPlaygroundContainer
+      ref={containerRef}
+      className="overflow-y-scroll overflow-x-hidden relative"
+    >
+      <Example containerRef={containerRef} />
+    </MotionPlaygroundContainer>
+  );
+};
+
+const Example = ({ containerRef }: ContainerRefType) => {
   const { scrollYProgress } = useScroll({ container: containerRef });
 
   const scaleX = useSpring(scrollYProgress);
@@ -15,12 +28,8 @@ export const ScrollAnimations = () => {
     [0, 1],
     ["rgb(86,1,245)", "rgb(1, 245,13)"]
   );
-
   return (
-    <MotionPlaygroundContainer
-      ref={containerRef}
-      className="overflow-y-scroll overflow-x-hidden relative"
-    >
+    <>
       <motion.div
         className="sticky top-0"
         style={{
@@ -121,6 +130,6 @@ export const ScrollAnimations = () => {
           some text some text some text some text some text some text some text
         </p>
       </div>
-    </MotionPlaygroundContainer>
+    </>
   );
 };

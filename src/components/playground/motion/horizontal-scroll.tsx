@@ -1,8 +1,9 @@
 "use client";
 
-import { motion, useTransform, useScroll } from "framer-motion";
-import { MutableRefObject, useRef } from "react";
+import { motion, useTransform, useScroll } from "motion/react";
+import { useRef } from "react";
 import MotionPlaygroundContainer from "./container";
+import { ContainerRefType } from "./types";
 
 export const Example = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -28,11 +29,7 @@ export const Example = () => {
   );
 };
 
-const HorizontalScrollCarousel = ({
-  containerRef,
-}: {
-  containerRef: MutableRefObject<HTMLDivElement | null>;
-}) => {
+const HorizontalScrollCarousel = ({ containerRef }: ContainerRefType) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,

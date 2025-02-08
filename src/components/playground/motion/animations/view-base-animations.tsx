@@ -2,19 +2,28 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "motion/react";
 import MotionPlaygroundContainer from "../container";
+import { ContainerRefType } from "../types";
 
 export const ViewBaseAnimations = () => {
-  const ref = useRef(null);
   const containerRef = useRef(null);
-  const isInView = useInView(ref, {
-    root: containerRef,
-  });
 
   return (
     <MotionPlaygroundContainer
       ref={containerRef}
       className="overflow-y-scroll h-[500px]"
     >
+      <Example containerRef={containerRef} />
+    </MotionPlaygroundContainer>
+  );
+};
+
+const Example = ({ containerRef }: ContainerRefType) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, {
+    root: containerRef,
+  });
+  return (
+    <>
       <div style={{ height: "150vh" }}>ViewBaseAnimations</div>
       <motion.div
         style={{ height: "500px", background: "black" }}
@@ -30,6 +39,6 @@ export const ViewBaseAnimations = () => {
           transition: "1s background",
         }}
       ></div>
-    </MotionPlaygroundContainer>
+    </>
   );
 };
