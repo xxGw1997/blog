@@ -5,7 +5,7 @@ import { useRef } from "react";
 import MotionPlaygroundContainer from "./container";
 import { ContainerRefType } from "./types";
 
-export const Example = () => {
+export const HorizontalScrollCarousel = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   return (
     <MotionPlaygroundContainer
@@ -18,7 +18,7 @@ export const Example = () => {
             Scroll down
           </span>
         </div>
-        <HorizontalScrollCarousel containerRef={containerRef} />
+        <Example containerRef={containerRef} />
         <div className="flex h-48 items-center justify-center">
           <span className="font-semibold uppercase text-neutral-500">
             Scroll up
@@ -29,11 +29,12 @@ export const Example = () => {
   );
 };
 
-const HorizontalScrollCarousel = ({ containerRef }: ContainerRefType) => {
+const Example = ({ containerRef }: ContainerRefType) => {
   const targetRef = useRef<HTMLDivElement | null>(null);
   const { scrollYProgress } = useScroll({
     target: targetRef,
     container: containerRef,
+    layoutEffect: false
   });
 
   const x = useTransform(scrollYProgress, [0, 1], ["1%", "-95%"]);
