@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useSpring, useTransform } from "motion/react";
 import MotionPlaygroundContainer from "../container";
 import { ContainerRefType } from "../types";
+import { SomeText } from "../some-text";
 
 export const ScrollAnimations = () => {
   const containerRef = useRef(null);
@@ -19,7 +20,10 @@ export const ScrollAnimations = () => {
 };
 
 const Example = ({ containerRef }: ContainerRefType) => {
-  const { scrollYProgress } = useScroll({ container: containerRef });
+  const { scrollYProgress } = useScroll({
+    container: containerRef,
+    layoutEffect: false,
+  });
 
   const scaleX = useSpring(scrollYProgress);
 
@@ -41,94 +45,7 @@ const Example = ({ containerRef }: ContainerRefType) => {
         }}
       />
       <div style={{ maxWidth: "700px", margin: "auto", padding: "1.2rem" }}>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
+        <SomeText />
       </div>
     </>
   );

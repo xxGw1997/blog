@@ -3,10 +3,12 @@ import { AnimationControls } from "~/components/playground/motion/animations/ani
 import { ScrollAnimations } from "~/components/playground/motion/animations/scroll-animations";
 import { UseAnimation } from "~/components/playground/motion/animations/use-animation";
 import { ViewBaseAnimations } from "~/components/playground/motion/animations/view-base-animations";
+import { SmoothScrollingParallax } from "~/components/playground/motion/smooth-scrolling-parallax";
 
 const MotionPlayground = () => {
   return (
     <div className="w-full h-full flex justify-center items-center flex-col gap-10 py-20">
+      <SmoothScrollingParallax />
       <AnimationControls />
       <UseAnimation />
       <ViewBaseAnimations />

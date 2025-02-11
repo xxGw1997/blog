@@ -4,6 +4,7 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import MotionPlaygroundContainer from "./container";
 import { ContainerRefType } from "./types";
+import { SomeText } from "./some-text";
 
 const Layered = () => {
   const containerRef = useRef(null);
@@ -13,7 +14,7 @@ const Layered = () => {
       className="w-[1000px] h-[800px] overflow-y-scroll"
     >
       <MultiLayer containerRef={containerRef} />
-      <Content />
+      <SomeText />
     </MotionPlaygroundContainer>
   );
 };
@@ -57,26 +58,6 @@ const MultiLayer = ({ containerRef }: ContainerRefType) => {
         }}
       />
     </div>
-  );
-};
-
-const Content = () => {
-  return (
-    <section>
-      {Array.from({ length: 7 }).map(() => (
-        <p className="py-3">
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-          some text some text some text some text some text some text some text
-        </p>
-      ))}
-    </section>
   );
 };
 
