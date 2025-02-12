@@ -119,6 +119,9 @@ const ProjectCard: React.FC<ProjectInfo> = ({
         </div>
 
         <Image
+          style={{
+            transform: "translateZ(80px)",
+          }}
           src={imageUrl}
           alt="Project I worked on"
           quality={95}

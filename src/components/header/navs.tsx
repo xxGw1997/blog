@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
-import { motion } from "motion/react";
+import { motion, useMotionValueEvent, useScroll } from "motion/react";
 
 import { Link as LinkType } from "~/lib/links";
 import { useActiveSectionContext } from "../active-section";
@@ -18,8 +18,28 @@ const Navs: React.FC<NavsProps> = ({ links }) => {
     useActiveSectionContext();
   const pathname = usePathname();
 
+  const [hidden, setIsHidden] = useState(false);
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const prev = scrollY.getPrevious() || 0;
+    if (latest > prev && latest > 150) {
+      setIsHidden(true);
+    } else {
+      setIsHidden(false);
+    }
+  });
+
   return (
-    <div className="hidden md:flex items-center justify-center fixed z-[99] -mt-5">
+    <motion.div
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-150%" },
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="md:flex items-center justify-center fixed z-[99] -mt-5"
+    >
       <ul className="flex flex-wrap items-center justify-center gap-y-1 text-[1rem] font-medium rounded-full backdrop-blur-md">
         {links.map((link) => (
           <li
@@ -58,7 +78,7 @@ const Navs: React.FC<NavsProps> = ({ links }) => {
           </li>
         ))}
       </ul>
-    </div>
+    </motion.div>
   );
 };
 

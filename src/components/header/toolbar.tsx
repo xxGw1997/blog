@@ -9,29 +9,6 @@ import DarkModeImg from "../dark-mode-img";
 import SignInButton from "../sign-in-button";
 import NavBar from "./navbar";
 
-const navItems = [
-  {
-    title: "Blog",
-    link: "/posts",
-    icon: <LuNewspaper size={24} />,
-  },
-  {
-    title: "Write",
-    link: "/write",
-    icon: <LuNewspaper size={24} />,
-  },
-  {
-    title: "Pictures",
-    link: "/pics",
-    icon: <LuNewspaper size={24} />,
-  },
-  {
-    title: "About",
-    link: "/about",
-    icon: <LuNewspaper size={24} />,
-  },
-];
-
 export const Toolbar = () => {
   return (
     <header className="h-[80px] flex items-center">
