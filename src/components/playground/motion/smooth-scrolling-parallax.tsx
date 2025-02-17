@@ -29,7 +29,7 @@ export const SmoothScrollingParallax = () => {
   return (
     <MotionPlaygroundContainer
       ref={wrapperRef}
-      className="w-[1250px] overflow-y-scroll bg-black"
+      className="w-[1250px] overflow-y-scroll bg-black relative"
       style={{
         height: CONTAINER_HEIGHT + "px",
       }}
