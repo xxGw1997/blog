@@ -24,6 +24,7 @@
     "gray-matter": "^4.0.3",
     "hamburger-react": "^2.5.2",
     "jose": "^5.9.6",
+    "lenis": "^1.1.20",
     "lucide-react": "^0.446.0",
     "motion": "^11.16.4",
     "next": "14.2.13",

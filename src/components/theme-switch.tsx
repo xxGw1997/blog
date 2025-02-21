@@ -7,6 +7,9 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
+// @ts-expect-error experimental API
+const isAppearanceTransition =  document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
 export const ThemeSwitch = ({ className }: ButtonProps) => {
   const { theme, setTheme } = useTheme();
   const [isClient, setIsClient] = useState(false);
@@ -18,6 +21,15 @@ export const ThemeSwitch = ({ className }: ButtonProps) => {
   if (!isClient) return "";
 
   const toggleTheme = async () => {
+    if (!isAppearanceTransition) {
+      if (theme === "light") {
+        setTheme("dark");
+      } else {
+        setTheme("light");
+      }
+      return;
+    }
+
     const transition = document.startViewTransition(() => {
       flushSync(() => {
         if (theme === "light") {
