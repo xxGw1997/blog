@@ -29,6 +29,10 @@ export const links: Link[] = [
     hash: "/#projects",
   },
   {
+    name: "Playground",
+    hash: "/playground"
+  },
+  {
     name: "Blog",
     hash: "/posts",
   },
