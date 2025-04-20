@@ -25,6 +25,7 @@ const MultiLayer = ({ containerRef }: ContainerRefType) => {
     target: ref,
     container: containerRef,
     offset: ["start start", "end start"],
+    layoutEffect: false
   });
   const textY = useTransform(scrollYProgress, [0, 1], ["0%", "400%"]);
   const backgroundY = useTransform(scrollYProgress, [0, 1], ["0%", "150%"]);
