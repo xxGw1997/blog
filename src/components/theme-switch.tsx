@@ -7,10 +7,11 @@ import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-// @ts-expect-error experimental API
-const isAppearanceTransition =  document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export const ThemeSwitch = ({ className }: ButtonProps) => {
+  // @ts-expect-error experimental API
+  const isAppearanceTransition =  document.startViewTransition && !window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  
   const { theme, setTheme } = useTheme();
   const [isClient, setIsClient] = useState(false);
 
