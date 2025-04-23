@@ -111,7 +111,7 @@ export const WrapperBlog = ({ headings, children }: WrapperPostProps) => {
   });
 
   return (
-    <div className="max-w-5xl mx-auto relative mt-[200px]" ref={clickArea}>
+    <div className="max-w-5xl mx-auto relative mt-[50px]" ref={clickArea}>
       <div className="sticky top-[150px] float-right max-md:hidden">
         <ul id="js-toc" className="flex flex-col gap-y-1">
           {headings.map((heading) => (

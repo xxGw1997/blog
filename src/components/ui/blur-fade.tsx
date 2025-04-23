@@ -65,7 +65,6 @@ export default function BlurFade({
         exit="hidden"
         variants={combinedVariants}
         transition={{
-          delay: 0.04 + delay,
           duration,
           ease: "easeOut",
         }}

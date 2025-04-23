@@ -81,7 +81,7 @@ export const getPostData = async (slug: string) => {
           meta: {
             title: post.title,
             desc: post.desc,
-            date: post.publishDate,
+            date: format(new Date(post.publishDate), "yyyy-MM-dd hh:mm"),
           },
           content: post.content,
         } as PostData;
